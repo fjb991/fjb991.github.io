@@ -1,0 +1,774 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Paul Studio — Apps</title>
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap');
+
+    :root {
+      --bg-primary: #0a0a0f;
+      --bg-card: #13131a;
+      --bg-card-hover: #1a1a24;
+      --accent-persona: #8B5CF6;
+      --accent-persona-glow: rgba(139, 92, 246, 0.3);
+      --accent-shade: #06B6D4;
+      --accent-shade-glow: rgba(6, 182, 212, 0.3);
+      --text-primary: #f0f0f5;
+      --text-secondary: #9ca3af;
+      --text-muted: #6b7280;
+      --border: rgba(255,255,255,0.06);
+      --gradient-hero: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+      --gradient-persona: linear-gradient(135deg, #8B5CF6 0%, #6D28D9 100%);
+      --gradient-shade: linear-gradient(135deg, #06B6D4 0%, #0891B2 100%);
+    }
+
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+
+    body {
+      font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+      background: var(--bg-primary);
+      color: var(--text-primary);
+      line-height: 1.6;
+      overflow-x: hidden;
+    }
+
+    /* Animated background */
+    .bg-effects {
+      position: fixed;
+      top: 0; left: 0;
+      width: 100%; height: 100%;
+      pointer-events: none;
+      z-index: 0;
+      overflow: hidden;
+    }
+    .bg-effects .orb {
+      position: absolute;
+      border-radius: 50%;
+      filter: blur(80px);
+      opacity: 0.15;
+      animation: float 20s ease-in-out infinite;
+    }
+    .bg-effects .orb:nth-child(1) {
+      width: 600px; height: 600px;
+      background: var(--accent-persona);
+      top: -10%; left: -10%;
+      animation-delay: 0s;
+    }
+    .bg-effects .orb:nth-child(2) {
+      width: 500px; height: 500px;
+      background: var(--accent-shade);
+      bottom: -10%; right: -10%;
+      animation-delay: -7s;
+    }
+    .bg-effects .orb:nth-child(3) {
+      width: 400px; height: 400px;
+      background: #ec4899;
+      top: 50%; left: 50%;
+      transform: translate(-50%, -50%);
+      animation-delay: -14s;
+      opacity: 0.08;
+    }
+    @keyframes float {
+      0%, 100% { transform: translate(0, 0) scale(1); }
+      33% { transform: translate(30px, -50px) scale(1.05); }
+      66% { transform: translate(-20px, 30px) scale(0.95); }
+    }
+
+    .container {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 0 24px;
+      position: relative;
+      z-index: 1;
+    }
+
+    /* Navigation */
+    nav {
+      padding: 24px 0;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+    .logo {
+      font-size: 1.4rem;
+      font-weight: 700;
+      letter-spacing: -0.5px;
+      background: linear-gradient(135deg, #f0f0f5, #9ca3af);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+    .logo span {
+      background: linear-gradient(135deg, var(--accent-persona), var(--accent-shade));
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+    .nav-links {
+      display: flex;
+      gap: 32px;
+      list-style: none;
+    }
+    .nav-links a {
+      color: var(--text-secondary);
+      text-decoration: none;
+      font-size: 0.9rem;
+      font-weight: 500;
+      transition: color 0.3s;
+    }
+    .nav-links a:hover { color: var(--text-primary); }
+
+    /* Hero */
+    .hero {
+      text-align: center;
+      padding: 80px 0 100px;
+    }
+    .hero-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 6px 16px;
+      border-radius: 100px;
+      background: rgba(139, 92, 246, 0.1);
+      border: 1px solid rgba(139, 92, 246, 0.2);
+      font-size: 0.85rem;
+      color: var(--accent-persona);
+      font-weight: 500;
+      margin-bottom: 32px;
+    }
+    .hero h1 {
+      font-size: clamp(2.5rem, 6vw, 4rem);
+      font-weight: 800;
+      line-height: 1.1;
+      letter-spacing: -1.5px;
+      margin-bottom: 20px;
+    }
+    .hero h1 .gradient-text {
+      background: linear-gradient(135deg, var(--accent-persona), var(--accent-shade));
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+    .hero p {
+      font-size: 1.15rem;
+      color: var(--text-secondary);
+      max-width: 560px;
+      margin: 0 auto;
+      line-height: 1.7;
+    }
+    .hero-stats {
+      display: flex;
+      justify-content: center;
+      gap: 48px;
+      margin-top: 48px;
+      flex-wrap: wrap;
+    }
+    .hero-stat {
+      text-align: center;
+    }
+    .hero-stat .num {
+      font-size: 2rem;
+      font-weight: 700;
+      letter-spacing: -1px;
+    }
+    .hero-stat .num.purple { color: var(--accent-persona); }
+    .hero-stat .num.cyan { color: var(--accent-shade); }
+    .hero-stat .num.pink { color: #ec4899; }
+    .hero-stat .label {
+      font-size: 0.8rem;
+      color: var(--text-muted);
+      margin-top: 4px;
+      font-weight: 500;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+    }
+
+    /* App Cards */
+    .apps-section {
+      padding-bottom: 120px;
+    }
+    .app-card {
+      border-radius: 24px;
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      overflow: hidden;
+      margin-bottom: 48px;
+      transition: transform 0.3s, border-color 0.3s;
+      position: relative;
+    }
+    .app-card:hover {
+      transform: translateY(-4px);
+    }
+    .app-card.persona:hover { border-color: rgba(139, 92, 246, 0.3); }
+    .app-card.shade:hover { border-color: rgba(6, 182, 212, 0.3); }
+
+    .app-card-inner {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      min-height: 480px;
+    }
+
+    .app-info {
+      padding: 56px 48px;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+    }
+    .app-icon-row {
+      display: flex;
+      align-items: center;
+      gap: 20px;
+      margin-bottom: 28px;
+    }
+    .app-icon {
+      width: 80px;
+      height: 80px;
+      border-radius: 20px;
+      box-shadow: 0 8px 32px rgba(0,0,0,0.4);
+      flex-shrink: 0;
+    }
+    .app-icon.persona-icon { box-shadow: 0 8px 32px var(--accent-persona-glow); }
+    .app-icon.shade-icon { box-shadow: 0 8px 32px var(--accent-shade-glow); }
+    .app-name-group h2 {
+      font-size: 1.8rem;
+      font-weight: 700;
+      letter-spacing: -0.5px;
+      line-height: 1.2;
+    }
+    .app-name-group .app-subtitle {
+      font-size: 0.9rem;
+      color: var(--text-muted);
+      margin-top: 4px;
+    }
+    .app-tag {
+      display: inline-block;
+      padding: 4px 12px;
+      border-radius: 8px;
+      font-size: 0.75rem;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+      margin-bottom: 20px;
+    }
+    .app-tag.persona-tag {
+      background: rgba(139, 92, 246, 0.15);
+      color: var(--accent-persona);
+    }
+    .app-tag.shade-tag {
+      background: rgba(6, 182, 212, 0.15);
+      color: var(--accent-shade);
+    }
+    .app-desc {
+      color: var(--text-secondary);
+      font-size: 1rem;
+      line-height: 1.8;
+      margin-bottom: 28px;
+    }
+    .app-features {
+      list-style: none;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 10px;
+      margin-bottom: 36px;
+    }
+    .app-features li {
+      font-size: 0.88rem;
+      color: var(--text-secondary);
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+    .app-features li .dot {
+      width: 6px; height: 6px;
+      border-radius: 50%;
+      flex-shrink: 0;
+    }
+    .persona .dot { background: var(--accent-persona); }
+    .shade .dot { background: var(--accent-shade); }
+
+    .app-meta {
+      display: flex;
+      gap: 24px;
+      margin-bottom: 32px;
+      flex-wrap: wrap;
+    }
+    .meta-item {
+      font-size: 0.8rem;
+      color: var(--text-muted);
+    }
+    .meta-item strong {
+      color: var(--text-secondary);
+      font-weight: 600;
+    }
+
+    .app-actions {
+      display: flex;
+      gap: 12px;
+      flex-wrap: wrap;
+    }
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 12px 28px;
+      border-radius: 14px;
+      font-size: 0.92rem;
+      font-weight: 600;
+      text-decoration: none;
+      transition: all 0.3s;
+      border: none;
+      cursor: pointer;
+    }
+    .btn-primary-persona {
+      background: var(--gradient-persona);
+      color: white;
+      box-shadow: 0 4px 20px var(--accent-persona-glow);
+    }
+    .btn-primary-persona:hover {
+      box-shadow: 0 8px 32px var(--accent-persona-glow);
+      transform: translateY(-2px);
+    }
+    .btn-primary-shade {
+      background: var(--gradient-shade);
+      color: white;
+      box-shadow: 0 4px 20px var(--accent-shade-glow);
+    }
+    .btn-primary-shade:hover {
+      box-shadow: 0 8px 32px var(--accent-shade-glow);
+      transform: translateY(-2px);
+    }
+    .btn svg { width: 18px; height: 18px; }
+
+    .app-visual {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 48px;
+      position: relative;
+      overflow: hidden;
+    }
+    .phone-mockup {
+      width: 260px;
+      height: 540px;
+      border-radius: 36px;
+      border: 3px solid rgba(255,255,255,0.1);
+      background: #1c1c28;
+      overflow: hidden;
+      position: relative;
+      box-shadow: 0 20px 60px rgba(0,0,0,0.5);
+    }
+    .phone-notch {
+      width: 120px;
+      height: 28px;
+      background: #0a0a0f;
+      border-radius: 0 0 16px 16px;
+      margin: 0 auto;
+      position: relative;
+      z-index: 2;
+    }
+    .phone-screen {
+      padding: 16px;
+      height: calc(100% - 28px);
+      display: flex;
+      flex-direction: column;
+    }
+
+    /* Persona phone screen */
+    .persona-screen .persona-header {
+      text-align: center;
+      padding: 20px 0 16px;
+    }
+    .persona-screen .persona-header h3 {
+      font-size: 1.1rem;
+      font-weight: 700;
+      letter-spacing: 2px;
+    }
+    .persona-screen .persona-header .gradient-text {
+      background: linear-gradient(135deg, var(--accent-persona), #ec4899);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+    .persona-screen .mbti-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 8px;
+      flex: 1;
+    }
+    .persona-screen .mbti-card {
+      border-radius: 12px;
+      padding: 12px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+    }
+    .mbti-card:nth-child(1) { background: linear-gradient(135deg, rgba(139,92,246,0.2), rgba(139,92,246,0.05)); }
+    .mbti-card:nth-child(2) { background: linear-gradient(135deg, rgba(6,182,212,0.2), rgba(6,182,212,0.05)); }
+    .mbti-card:nth-child(3) { background: linear-gradient(135deg, rgba(236,72,153,0.2), rgba(236,72,153,0.05)); }
+    .mbti-card:nth-child(4) { background: linear-gradient(135deg, rgba(245,158,11,0.2), rgba(245,158,11,0.05)); }
+    .mbti-card .letter {
+      font-size: 1.3rem;
+      font-weight: 800;
+    }
+    .mbti-card:nth-child(1) .letter { color: var(--accent-persona); }
+    .mbti-card:nth-child(2) .letter { color: var(--accent-shade); }
+    .mbti-card:nth-child(3) .letter { color: #ec4899; }
+    .mbti-card:nth-child(4) .letter { color: #f59e0b; }
+    .mbti-card .dim {
+      font-size: 0.65rem;
+      color: var(--text-muted);
+      margin-top: 2px;
+    }
+    .persona-screen .result-badge {
+      text-align: center;
+      padding: 16px 0 8px;
+    }
+    .result-badge .type {
+      font-size: 1.6rem;
+      font-weight: 800;
+      background: linear-gradient(135deg, var(--accent-persona), var(--accent-shade));
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      letter-spacing: 3px;
+    }
+    .result-badge .sub {
+      font-size: 0.7rem;
+      color: var(--text-muted);
+      margin-top: 2px;
+    }
+
+    /* One Shade phone screen */
+    .shade-screen .shade-header {
+      text-align: center;
+      padding: 16px 0 12px;
+    }
+    .shade-screen .shade-header h3 {
+      font-size: 1rem;
+      font-weight: 700;
+      color: var(--accent-shade);
+    }
+    .shade-screen .shade-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 6px;
+      flex: 1;
+      padding: 0 4px;
+    }
+    .shade-screen .tile {
+      border-radius: 8px;
+      aspect-ratio: 1;
+      transition: transform 0.2s;
+    }
+    .shade-screen .tile:hover { transform: scale(1.05); }
+    .shade-screen .tile-odd {
+      background: #0ea5e9;
+      box-shadow: 0 0 20px rgba(14, 165, 233, 0.4);
+      animation: pulse-glow 2s ease-in-out infinite;
+    }
+    .shade-screen .tile-normal {
+      background: #0891b2;
+    }
+    @keyframes pulse-glow {
+      0%, 100% { box-shadow: 0 0 15px rgba(14, 165, 233, 0.3); }
+      50% { box-shadow: 0 0 30px rgba(14, 165, 233, 0.6); }
+    }
+    .shade-screen .game-footer {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 12px 4px 4px;
+    }
+    .shade-screen .level {
+      font-size: 0.75rem;
+      color: var(--text-muted);
+      font-weight: 600;
+    }
+    .shade-screen .level span { color: var(--accent-shade); }
+    .shade-screen .hearts {
+      display: flex;
+      gap: 4px;
+    }
+    .shade-screen .heart {
+      width: 16px; height: 16px;
+      background: #ef4444;
+      clip-path: path('M8 14l-1.1-1C3.4 9.9 1 7.8 1 5.3 1 3.4 2.4 2 4.3 2c1.1 0 2.1.5 2.7 1.3C7.6 2.5 8.6 2 9.7 2 11.6 2 13 3.4 13 5.3c0 2.5-2.4 4.6-5.9 7.7L8 14z');
+    }
+
+    /* Privacy badges */
+    .privacy-section {
+      text-align: center;
+      padding: 40px 0 100px;
+    }
+    .privacy-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      padding: 12px 24px;
+      border-radius: 100px;
+      background: rgba(16, 185, 129, 0.08);
+      border: 1px solid rgba(16, 185, 129, 0.15);
+      font-size: 0.9rem;
+      color: #10b981;
+      font-weight: 500;
+    }
+    .privacy-badge svg { width: 20px; height: 20px; }
+
+    /* Footer */
+    footer {
+      text-align: center;
+      padding: 32px 0 48px;
+      border-top: 1px solid var(--border);
+    }
+    footer p {
+      font-size: 0.85rem;
+      color: var(--text-muted);
+    }
+    footer .studio-name {
+      font-weight: 600;
+      color: var(--text-secondary);
+    }
+
+    /* Responsive */
+    @media (max-width: 768px) {
+      .app-card-inner {
+        grid-template-columns: 1fr;
+      }
+      .app-visual {
+        padding: 32px;
+        order: -1;
+      }
+      .app-info {
+        padding: 32px 24px;
+      }
+      .app-features {
+        grid-template-columns: 1fr;
+      }
+      .phone-mockup {
+        width: 220px;
+        height: 460px;
+      }
+      .nav-links { display: none; }
+      .hero { padding: 48px 0 64px; }
+      .hero-stats { gap: 32px; }
+    }
+  </style>
+</head>
+<body>
+
+<div class="bg-effects">
+  <div class="orb"></div>
+  <div class="orb"></div>
+  <div class="orb"></div>
+</div>
+
+<div class="container">
+  <nav>
+    <div class="logo"><span>Paul</span> Studio</div>
+    <ul class="nav-links">
+      <li><a href="#apps">Apps</a></li>
+      <li><a href="https://apps.apple.com/us/developer/kin-po-fong/id6582794211" target="_blank">App Store</a></li>
+    </ul>
+  </nav>
+
+  <section class="hero">
+    <div class="hero-badge">✨ Crafted with care in Hong Kong</div>
+    <h1>Simple.<br><span class="gradient-text">Beautiful.</span><br>Apps.</h1>
+    <p>Small apps that do one thing well. Designed for real people, built with attention to every pixel.</p>
+    <div class="hero-stats">
+      <div class="hero-stat">
+        <div class="num purple">2</div>
+        <div class="label">Apps</div>
+      </div>
+      <div class="hero-stat">
+        <div class="num cyan">12</div>
+        <div class="label">Languages</div>
+      </div>
+      <div class="hero-stat">
+        <div class="num pink">0</div>
+        <div class="label">Data Collected</div>
+      </div>
+    </div>
+  </section>
+
+  <section class="apps-section" id="apps">
+
+    <!-- Persona MBTI -->
+    <div class="app-card persona">
+      <div class="app-card-inner">
+        <div class="app-info">
+          <div class="app-icon-row">
+            <img class="app-icon persona-icon" src="https://is1-ssl.mzstatic.com/image/thumb/Purple211/v4/43/68/de/4368ded7-bc36-0f36-603f-b7a4a08451fa/AppIcon-0-0-1x_U007ephone-0-1-85-220.png/512x512bb.jpg" alt="Persona MBTI">
+            <div class="app-name-group">
+              <h2>Persona MBTI</h2>
+              <div class="app-subtitle">Discover your MBTI personality</div>
+            </div>
+          </div>
+          <span class="app-tag persona-tag">Personality Test</span>
+          <p class="app-desc">A beautifully designed MBTI personality test that reveals your unique personality type in just 2 minutes. Based on the world-renowned MBTI framework with 12 carefully crafted questions across 4 dimensions.</p>
+          <ul class="app-features persona">
+            <li><span class="dot"></span>16 unique personality types</li>
+            <li><span class="dot"></span>In-depth trait analysis</li>
+            <li><span class="dot"></span>Compatibility insights</li>
+            <li><span class="dot"></span>Beautiful result cards</li>
+            <li><span class="dot"></span>4 dimension breakdown</li>
+            <li><span class="dot"></span>Save &amp; share results</li>
+          </ul>
+          <div class="app-meta">
+            <div class="meta-item"><strong>Lifestyle</strong></div>
+            <div class="meta-item"><strong>iPhone</strong> · iOS 17+</div>
+            <div class="meta-item"><strong>9 languages</strong></div>
+            <div class="meta-item"><strong>Free</strong></div>
+          </div>
+          <div class="app-actions">
+            <a href="https://apps.apple.com/us/app/persona-mbti/id6767220387" target="_blank" class="btn btn-primary-persona">
+              <svg viewBox="0 0 24 24" fill="currentColor"><path d="M18.71 19.5c-.83 1.24-1.71 2.45-3.05 2.47-1.34.03-1.77-.79-3.29-.79-1.53 0-2 .77-3.27.82-1.31.05-2.3-1.32-3.14-2.53C4.25 17 2.94 12.45 4.7 9.39c.87-1.52 2.43-2.48 4.12-2.51 1.28-.02 2.5.87 3.29.87.78 0 2.26-1.07 3.8-.91.65.03 2.47.26 3.64 1.98-.09.06-2.17 1.28-2.15 3.81.03 3.02 2.65 4.03 2.68 4.04-.03.07-.42 1.44-1.38 2.83M13 3.5c.73-.83 1.94-1.46 2.94-1.5.13 1.17-.34 2.35-1.04 3.19-.69.85-1.83 1.51-2.95 1.42-.15-1.15.41-2.35 1.05-3.11z"/></svg>
+              Download
+            </a>
+          </div>
+        </div>
+        <div class="app-visual">
+          <div class="phone-mockup">
+            <div class="phone-notch"></div>
+            <div class="phone-screen persona-screen">
+              <div class="persona-header">
+                <h3><span class="gradient-text">PERSONA</span></h3>
+              </div>
+              <div class="mbti-grid">
+                <div class="mbti-card">
+                  <div class="letter">E</div>
+                  <div class="dim">Extraversion</div>
+                </div>
+                <div class="mbti-card">
+                  <div class="letter">S</div>
+                  <div class="dim">Sensing</div>
+                </div>
+                <div class="mbti-card">
+                  <div class="letter">T</div>
+                  <div class="dim">Thinking</div>
+                </div>
+                <div class="mbti-card">
+                  <div class="letter">J</div>
+                  <div class="dim">Judging</div>
+                </div>
+              </div>
+              <div class="result-badge">
+                <div class="type">ESTJ</div>
+                <div class="sub">The Executive</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- One Shade -->
+    <div class="app-card shade">
+      <div class="app-card-inner">
+        <div class="app-info">
+          <div class="app-icon-row">
+            <img class="app-icon shade-icon" src="https://is1-ssl.mzstatic.com/image/thumb/Purple211/v4/31/3c/6f/313c6fb7-b5e4-e8fe-d922-74b7d6a759dc/AppIcon-0-0-1x_U007emarketing-0-11-0-85-220.png/512x512bb.jpg" alt="One Shade">
+            <div class="app-name-group">
+              <h2>One Shade</h2>
+              <div class="app-subtitle">Spot the different color tile!</div>
+            </div>
+          </div>
+          <span class="app-tag shade-tag">Puzzle Game</span>
+          <p class="app-desc">The ultimate color puzzle game! A grid of seemingly identical colored tiles — but one is slightly different. Two exciting modes: Classic with 3 lives, and Timed race against the clock.</p>
+          <ul class="app-features shade">
+            <li><span class="dot"></span>Classic &amp; Timed modes</li>
+            <li><span class="dot"></span>Progressive difficulty</li>
+            <li><span class="dot"></span>Coin hint system</li>
+            <li><span class="dot"></span>Best score tracking</li>
+            <li><span class="dot"></span>Clean beautiful UI</li>
+            <li><span class="dot"></span>6 languages</li>
+          </ul>
+          <div class="app-meta">
+            <div class="meta-item"><strong>Casual / Game</strong></div>
+            <div class="meta-item"><strong>iPhone · iPad · Mac</strong></div>
+            <div class="meta-item"><strong>iOS 13+</strong></div>
+            <div class="meta-item"><strong>Free</strong></div>
+          </div>
+          <div class="app-actions">
+            <a href="https://apps.apple.com/us/app/one-shade/id6767887401" target="_blank" class="btn btn-primary-shade">
+              <svg viewBox="0 0 24 24" fill="currentColor"><path d="M18.71 19.5c-.83 1.24-1.71 2.45-3.05 2.47-1.34.03-1.77-.79-3.29-.79-1.53 0-2 .77-3.27.82-1.31.05-2.3-1.32-3.14-2.53C4.25 17 2.94 12.45 4.7 9.39c.87-1.52 2.43-2.48 4.12-2.51 1.28-.02 2.5.87 3.29.87.78 0 2.26-1.07 3.8-.91.65.03 2.47.26 3.64 1.98-.09.06-2.17 1.28-2.15 3.81.03 3.02 2.65 4.03 2.68 4.04-.03.07-.42 1.44-1.38 2.83M13 3.5c.73-.83 1.94-1.46 2.94-1.5.13 1.17-.34 2.35-1.04 3.19-.69.85-1.83 1.51-2.95 1.42-.15-1.15.41-2.35 1.05-3.11z"/></svg>
+              Download
+            </a>
+          </div>
+        </div>
+        <div class="app-visual">
+          <div class="phone-mockup">
+            <div class="phone-notch"></div>
+            <div class="phone-screen shade-screen">
+              <div class="shade-header">
+                <h3>ONE SHADE</h3>
+              </div>
+              <div class="shade-grid" id="shadeGrid">
+                <!-- filled by JS -->
+              </div>
+              <div class="game-footer">
+                <div class="level">Level <span>12</span></div>
+                <div class="hearts">
+                  <div class="heart"></div>
+                  <div class="heart"></div>
+                  <div class="heart"></div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </section>
+
+  <div class="privacy-section">
+    <div class="privacy-badge">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>
+      Data Not Collected — Your privacy is respected
+    </div>
+  </div>
+
+  <footer>
+    <p>&copy; 2025 <span class="studio-name">Paul Studio</span> · Made with ❤️ in Hong Kong</p>
+  </footer>
+</div>
+
+<script>
+  // Generate One Shade game grid
+  (function() {
+    const grid = document.getElementById('shadeGrid');
+    if (!grid) return;
+    const levels = [
+      { cols: 3, rows: 4, oddIdx: 7 },
+      { cols: 3, rows: 5, oddIdx: 3 },
+      { cols: 4, rows: 4, oddIdx: 11 },
+      { cols: 4, rows: 5, oddIdx: 14 },
+    ];
+    let currentLevel = 0;
+
+    function renderLevel() {
+      const lv = levels[currentLevel % levels.length];
+      grid.style.gridTemplateColumns = `repeat(${lv.cols}, 1fr)`;
+      grid.innerHTML = '';
+      for (let i = 0; i < lv.cols * lv.rows; i++) {
+        const tile = document.createElement('div');
+        tile.className = 'tile ' + (i === lv.oddIdx ? 'tile-odd' : 'tile-normal');
+        grid.appendChild(tile);
+      }
+    }
+
+    renderLevel();
+    setInterval(() => {
+      currentLevel++;
+      grid.style.opacity = '0';
+      setTimeout(() => {
+        renderLevel();
+        grid.style.opacity = '1';
+      }, 200);
+    }, 3000);
+    grid.style.transition = 'opacity 0.2s';
+  })();
+</script>
+
+</body>
+</html>
