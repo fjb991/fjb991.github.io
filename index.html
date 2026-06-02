@@ -21,6 +21,9 @@
       --border: rgba(255,255,255,0.06);
       --gradient-persona: linear-gradient(135deg, #8B5CF6 0%, #6D28D9 100%);
       --gradient-shade: linear-gradient(135deg, #06B6D4 0%, #0891B2 100%);
+      --accent-pitch: #F59E0B;
+      --accent-pitch-glow: rgba(245, 158, 11, 0.3);
+      --gradient-pitch: linear-gradient(135deg, #F59E0B 0%, #D97706 100%);
     }
 
     * { margin: 0; padding: 0; box-sizing: border-box; }
@@ -248,6 +251,7 @@
     .app-card:hover { transform: translateY(-4px); }
     .app-card.persona:hover { border-color: rgba(139, 92, 246, 0.3); }
     .app-card.shade:hover { border-color: rgba(6, 182, 212, 0.3); }
+    .app-card.pitch:hover { border-color: rgba(245, 158, 11, 0.3); }
     .app-card-inner {
       display: grid;
       grid-template-columns: 1fr 1fr;
@@ -273,6 +277,7 @@
     }
     .app-icon.persona-icon { box-shadow: 0 8px 32px var(--accent-persona-glow); }
     .app-icon.shade-icon { box-shadow: 0 8px 32px var(--accent-shade-glow); }
+    .app-icon.pitch-icon { box-shadow: 0 8px 32px var(--accent-pitch-glow); }
     .app-name-group h2 {
       font-size: 1.8rem;
       font-weight: 700;
@@ -302,6 +307,10 @@
       background: rgba(6, 182, 212, 0.15);
       color: var(--accent-shade);
     }
+    .app-tag.pitch-tag {
+      background: rgba(245, 158, 11, 0.15);
+      color: var(--accent-pitch);
+    }
     .app-desc {
       color: var(--text-secondary);
       font-size: 1rem;
@@ -329,6 +338,7 @@
     }
     .persona .dot { background: var(--accent-persona); }
     .shade .dot { background: var(--accent-shade); }
+    .pitch .dot { background: var(--accent-pitch); }
     .app-meta {
       display: flex;
       gap: 24px;
@@ -377,6 +387,15 @@
     }
     .btn-primary-shade:hover {
       box-shadow: 0 8px 32px var(--accent-shade-glow);
+      transform: translateY(-2px);
+    }
+    .btn-primary-pitch {
+      background: var(--gradient-pitch);
+      color: white;
+      box-shadow: 0 4px 20px var(--accent-pitch-glow);
+    }
+    .btn-primary-pitch:hover {
+      box-shadow: 0 8px 32px var(--accent-pitch-glow);
       transform: translateY(-2px);
     }
     .btn svg { width: 18px; height: 18px; }
@@ -526,6 +545,102 @@
       clip-path: path('M8 14l-1.1-1C3.4 9.9 1 7.8 1 5.3 1 3.4 2.4 2 4.3 2c1.1 0 2.1.5 2.7 1.3C7.6 2.5 8.6 2 9.7 2 11.6 2 13 3.4 13 5.3c0 2.5-2.4 4.6-5.9 7.7L8 14z');
     }
 
+    /* Pitch Quest phone */
+    .pitch-screen .pitch-header {
+      text-align: center;
+      padding: 16px 0 12px;
+    }
+    .pitch-screen .pitch-header h3 {
+      font-size: 1rem;
+      font-weight: 700;
+      color: var(--accent-pitch);
+      letter-spacing: 1px;
+    }
+    .pitch-screen .pitch-question {
+      text-align: center;
+      font-size: 0.75rem;
+      color: var(--text-secondary);
+      margin-bottom: 12px;
+      padding: 8px;
+      background: rgba(245, 158, 11, 0.1);
+      border-radius: 8px;
+    }
+    .pitch-screen .pitch-notes {
+      display: flex;
+      justify-content: center;
+      gap: 3px;
+      margin-bottom: 16px;
+    }
+    .pitch-screen .pitch-note {
+      width: 28px;
+      height: 80px;
+      border-radius: 4px;
+      background: linear-gradient(180deg, #1a1a24, #252530);
+      border: 1px solid rgba(255,255,255,0.08);
+      position: relative;
+    }
+    .pitch-screen .pitch-note.white {
+      background: linear-gradient(180deg, #e8e8f0, #d0d0d8);
+      border: 1px solid rgba(0,0,0,0.1);
+    }
+    .pitch-screen .pitch-note.active {
+      background: linear-gradient(180deg, var(--accent-pitch), #D97706);
+      box-shadow: 0 0 20px var(--accent-pitch-glow);
+      animation: note-glow 1.5s ease-in-out infinite;
+    }
+    .pitch-screen .pitch-note.black {
+      width: 18px;
+      height: 50px;
+      background: linear-gradient(180deg, #2a2a36, #1a1a24);
+      border: 1px solid rgba(255,255,255,0.05);
+      margin: 0 -6px;
+      z-index: 2;
+    }
+    @keyframes note-glow {
+      0%, 100% { box-shadow: 0 0 15px var(--accent-pitch-glow); }
+      50% { box-shadow: 0 0 30px rgba(245, 158, 11, 0.5); }
+    }
+    .pitch-screen .pitch-options {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 6px;
+    }
+    .pitch-screen .pitch-opt {
+      padding: 8px 4px;
+      border-radius: 8px;
+      text-align: center;
+      font-size: 0.8rem;
+      font-weight: 700;
+      background: rgba(255,255,255,0.04);
+      border: 1px solid rgba(255,255,255,0.08);
+      color: var(--text-secondary);
+      transition: all 0.3s;
+    }
+    .pitch-screen .pitch-opt.selected {
+      background: rgba(245, 158, 11, 0.2);
+      border-color: var(--accent-pitch);
+      color: var(--accent-pitch);
+    }
+    .pitch-screen .pitch-score {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-top: 12px;
+      padding-top: 10px;
+      border-top: 1px solid rgba(255,255,255,0.06);
+    }
+    .pitch-screen .pitch-score .stars {
+      color: var(--accent-pitch);
+      font-size: 0.85rem;
+      letter-spacing: 2px;
+    }
+    .pitch-screen .pitch-score .level-info {
+      font-size: 0.7rem;
+      color: var(--text-muted);
+      font-weight: 600;
+    }
+    .pitch-screen .pitch-score .level-info span { color: var(--accent-pitch); }
+
     /* Privacy */
     .privacy-section {
       text-align: center;
@@ -597,7 +712,7 @@
     <p class="reveal d2" data-i18n="hero_desc">Small apps that do one thing well. Designed for real people, built with attention to every pixel.</p>
     <div class="hero-stats reveal d3">
       <div class="hero-stat">
-        <div class="num purple">2</div>
+        <div class="num purple">3</div>
         <div class="label" data-i18n="stat_apps">Apps</div>
       </div>
       <div class="hero-stat">
@@ -609,6 +724,75 @@
   </section>
 
   <section class="apps-section" id="apps">
+    <!-- Pitch Quest (New!) -->
+    <div class="app-card pitch reveal">
+      <div class="app-card-inner">
+        <div class="app-info">
+          <div class="app-icon-row">
+            <img class="app-icon pitch-icon" src="https://is1-ssl.mzstatic.com/image/thumb/Purple211/v4/88/01/a6/8801a6d2-2417-52a9-b9e8-db42d71f9b77/AppIcon-0-0-1x_U007emarketing-0-8-0-85-220.png/512x512bb.jpg" alt="Pitch Quest">
+            <div class="app-name-group">
+              <h2>Pitch Quest</h2>
+              <div class="app-subtitle" data-i18n="pitch_subtitle">Train your ears, one note at a time</div>
+            </div>
+          </div>
+          <span class="app-tag pitch-tag" data-i18n="pitch_tag">Music Education</span>
+          <p class="app-desc" data-i18n="pitch_desc">From single-note recognition to interval judgment and melody recall, Pitch Quest guides you step by step through three training paths — Absolute Pitch, Relative Pitch, and Melody Memory — each with 10 progressive levels.</p>
+          <ul class="app-features pitch">
+            <li><span class="dot"></span><span data-i18n="pitch_f1">3 training paths × 10 levels</span></li>
+            <li><span class="dot"></span><span data-i18n="pitch_f2">128 real instrument sounds</span></li>
+            <li><span class="dot"></span><span data-i18n="pitch_f3">Built-in lessons &amp; hints</span></li>
+            <li><span class="dot"></span><span data-i18n="pitch_f4">Stars, scores &amp; combos</span></li>
+            <li><span class="dot"></span><span data-i18n="pitch_f5">Achievement wall &amp; streaks</span></li>
+            <li><span class="dot"></span><span data-i18n="pitch_f6">Works offline</span></li>
+          </ul>
+          <div class="app-meta">
+            <div class="meta-item"><strong data-i18n="pitch_cat">Education</strong></div>
+            <div class="meta-item"><strong>iPhone · iPad</strong></div>
+            <div class="meta-item"><strong>iOS 17+</strong></div>
+            <div class="meta-item"><strong data-i18n="meta_free">Free</strong></div>
+          </div>
+          <div class="app-actions">
+            <a href="https://apps.apple.com/us/app/pitch-quest/id6773413128" target="_blank" class="btn btn-primary-pitch">
+              <svg viewBox="0 0 24 24" fill="currentColor"><path d="M18.71 19.5c-.83 1.24-1.71 2.45-3.05 2.47-1.34.03-1.77-.79-3.29-.79-1.53 0-2 .77-3.27.82-1.31.05-2.3-1.32-3.14-2.53C4.25 17 2.94 12.45 4.7 9.39c.87-1.52 2.43-2.48 4.12-2.51 1.28-.02 2.5.87 3.29.87.78 0 2.26-1.07 3.8-.91.65.03 2.47.26 3.64 1.98-.09.06-2.17 1.28-2.15 3.81.03 3.02 2.65 4.03 2.68 4.04-.03.07-.42 1.44-1.38 2.83M13 3.5c.73-.83 1.94-1.46 2.94-1.5.13 1.17-.34 2.35-1.04 3.19-.69.85-1.83 1.51-2.95 1.42-.15-1.15.41-2.35 1.05-3.11z"/></svg>
+              <span data-i18n="btn_download">Download</span>
+            </a>
+          </div>
+        </div>
+        <div class="app-visual">
+          <div class="phone-mockup">
+            <div class="phone-notch"></div>
+            <div class="phone-screen pitch-screen">
+              <div class="pitch-header"><h3>♪ PITCH QUEST ♪</h3></div>
+              <div class="pitch-question" data-i18n="pitch_mock_q">Which note is this?</div>
+              <div class="pitch-notes" id="pitchPiano">
+                <div class="pitch-note white"></div>
+                <div class="pitch-note black"></div>
+                <div class="pitch-note white"></div>
+                <div class="pitch-note black"></div>
+                <div class="pitch-note white active"></div>
+                <div class="pitch-note black"></div>
+                <div class="pitch-note white"></div>
+              </div>
+              <div class="pitch-options" id="pitchOptions">
+                <div class="pitch-opt">C</div>
+                <div class="pitch-opt">D</div>
+                <div class="pitch-opt selected">E</div>
+                <div class="pitch-opt">F</div>
+                <div class="pitch-opt">G</div>
+                <div class="pitch-opt">A</div>
+                <div class="pitch-opt">B</div>
+                <div class="pitch-opt">C♯</div>
+              </div>
+              <div class="pitch-score">
+                <div class="stars">★ ★ ★ ☆ ☆</div>
+                <div class="level-info" data-i18n="pitch_mock_level">Level <span>3</span></div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
     <!-- Persona MBTI -->
     <div class="app-card persona reveal">
       <div class="app-card-inner">
@@ -888,6 +1072,18 @@ const i18n = {
   shade_f5: 'Coin hint system',
   shade_f6: '6 languages',
   shade_cat: 'Puzzle Game',
+  pitch_subtitle: 'Train your ears, one note at a time',
+  pitch_tag: 'Music Education',
+  pitch_desc: 'From single-note recognition to interval judgment and melody recall, Pitch Quest guides you step by step through three training paths — Absolute Pitch, Relative Pitch, and Melody Memory — each with 10 progressive levels.',
+  pitch_f1: '3 training paths × 10 levels',
+  pitch_f2: '128 real instrument sounds',
+  pitch_f3: 'Built-in lessons & hints',
+  pitch_f4: 'Stars, scores & combos',
+  pitch_f5: 'Achievement wall & streaks',
+  pitch_f6: 'Works offline',
+  pitch_cat: 'Education',
+  pitch_mock_q: 'Which note is this?',
+  pitch_mock_level: 'Level <span>3</span>',
   meta_free: 'Free', meta_paid: 'HK$8',
   btn_download: 'Download',
   privacy: 'Zero Data Collected — Your privacy is fully respected',
@@ -918,6 +1114,18 @@ const i18n = {
   shade_f5: '金幣提示系統',
   shade_f6: '6 種語言',
   shade_cat: '益智遊戲',
+  pitch_subtitle: '訓練你的耳朵，一個音符一個音符來',
+  pitch_tag: '音樂教育',
+  pitch_desc: '從單音辨識到音程判斷和旋律記憶，Pitch Quest 通過三條訓練路線引導你逐步提升 — 絕對音感、相對音感和旋律記憶 — 每條路線各 10 個遞進等級。',
+  pitch_f1: '3 條訓練路線 × 10 個等級',
+  pitch_f2: '128 種真實樂器音色',
+  pitch_f3: '內建課程與提示',
+  pitch_f4: '星星、分數與連擊',
+  pitch_f5: '成就牆與每日連續',
+  pitch_f6: '離線使用',
+  pitch_cat: '教育',
+  pitch_mock_q: '這是什麼音？',
+  pitch_mock_level: '等級 <span>3</span>',
   meta_free: '免費', meta_paid: 'HK$8',
   btn_download: '下載',
   privacy: '不收集任何數據 — 完全尊重您的隱私',
@@ -948,6 +1156,18 @@ const i18n = {
   shade_f5: '金币提示系统',
   shade_f6: '6 种语言',
   shade_cat: '益智游戏',
+  pitch_subtitle: '训练你的耳朵，一个音符一个音符来',
+  pitch_tag: '音乐教育',
+  pitch_desc: '从单音辨识到音程判断和旋律记忆，Pitch Quest 通过三条训练路线引导你逐步提升 — 绝对音感、相对音感和旋律记忆 — 每条路线各 10 个递进等级。',
+  pitch_f1: '3 条训练路线 × 10 个等级',
+  pitch_f2: '128 种真实乐器音色',
+  pitch_f3: '内置课程与提示',
+  pitch_f4: '星星、分数与连击',
+  pitch_f5: '成就墙与每日连续',
+  pitch_f6: '离线使用',
+  pitch_cat: '教育',
+  pitch_mock_q: '这是什么音？',
+  pitch_mock_level: '等级 <span>3</span>',
   meta_free: '免费', meta_paid: 'HK$8',
   btn_download: '下载',
   privacy: '不收集任何数据 — 完全尊重您的隐私',
@@ -978,6 +1198,18 @@ const i18n = {
   shade_f5: 'コインヒントシステム',
   shade_f6: '6言語対応',
   shade_cat: 'パズルゲーム',
+  pitch_subtitle: '一音ずつ、耳を鍛えよう',
+  pitch_tag: '音楽教育',
+  pitch_desc: '単音認識から音程判断、メロディ記憶まで、Pitch Quest は3つのトレーニングルートで段階的にガイドします — 絶対音感、相対音感、メロディ記憶 — 各10のレベル。',
+  pitch_f1: '3つのトレーニング × 10レベル',
+  pitch_f2: '128種類のリアル楽器音',
+  pitch_f3: '内蔵レッスンとヒント',
+  pitch_f4: 'スター、スコア、コンボ',
+  pitch_f5: '実績ウォール & ストリーク',
+  pitch_f6: 'オフライン対応',
+  pitch_cat: '教育',
+  pitch_mock_q: 'これは何の音？',
+  pitch_mock_level: 'レベル <span>3</span>',
   meta_free: '無料', meta_paid: 'HK$8',
   btn_download: 'ダウンロード',
   privacy: 'データ収集なし — お客様のプライバシーを完全に尊重します',
@@ -1008,6 +1240,18 @@ const i18n = {
   shade_f5: '코인 힌트 시스템',
   shade_f6: '6개 언어',
   shade_cat: '퍼즐 게임',
+  pitch_subtitle: '한 음씩, 당신의 귀를 훈련하세요',
+  pitch_tag: '음악 교육',
+  pitch_desc: '단음 인식부터 음정 판단, 멜로디 기억까지, Pitch Quest는 절대음감, 상대음감, 멜로디 기억의 세 가지 훈련 경로로 단계별로 안내합니다 — 각 10개의 레벨.',
+  pitch_f1: '3가지 훈련 경로 × 10레벨',
+  pitch_f2: '128개 실제 악기 소리',
+  pitch_f3: '내장 레슨 & 힌트',
+  pitch_f4: '별, 점수 & 콤보',
+  pitch_f5: '업적 벽 & 연속 기록',
+  pitch_f6: '오프라인 사용',
+  pitch_cat: '교육',
+  pitch_mock_q: '이 음은 무엇인가요?',
+  pitch_mock_level: '레벨 <span>3</span>',
   meta_free: '무료', meta_paid: 'HK$8',
   btn_download: '다운로드',
   privacy: '데이터 수집 없음 — 고객님의 개인정보를 완전히 존중합니다',
@@ -1038,6 +1282,18 @@ const i18n = {
   shade_f5: 'ระบบเคล็ดลับเหรียญ',
   shade_f6: '6 ภาษา',
   shade_cat: 'เกมปริศนา',
+  pitch_subtitle: 'ฝึกหูของคุณ ทีละโน้ต',
+  pitch_tag: 'การศึกษาดนตรี',
+  pitch_desc: 'จากการจดจำโน้ตเดี่ยวไปจนถึงการตัดสินช่วงเสียงและจดจำทำนอง Pitch Quest นำทางคุณทีละขั้นตอนผ่านสามเส้นทางฝึก — เพอร์เฟกต์พิทช์ รีเลทีฟพิทช์ และเมโลดี้เมมโมรี่ — แต่ละเส้นทาง 10 ระดับ',
+  pitch_f1: '3 เส้นทางฝึก × 10 ระดับ',
+  pitch_f2: '128 เสียงเครื่องดนตรีจริง',
+  pitch_f3: 'บทเรียนและคำใบ้ในแอป',
+  pitch_f4: 'ดาว คะแนน และคอมโบ',
+  pitch_f5: 'กำแพงความสำเร็จ & สตรีค',
+  pitch_f6: 'ใช้แบบออฟไลน์',
+  pitch_cat: 'การศึกษา',
+  pitch_mock_q: 'นี่คือโน้ตอะไร?',
+  pitch_mock_level: 'ระดับ <span>3</span>',
   meta_free: 'ฟรี', meta_paid: 'HK$8',
   btn_download: 'ดาวน์โหลด',
   privacy: 'ไม่เก็บรวบรวมข้อมูล — เคารพความเป็นส่วนตัวของคุณอย่างเต็มที่',
@@ -1068,6 +1324,18 @@ const i18n = {
   shade_f5: 'Coin hint system',
   shade_f6: '6 wika',
   shade_cat: 'Puzzle Game',
+  pitch_subtitle: 'Sanayin ang iyong pandinig, isang nota sa pagkakataon',
+  pitch_tag: 'Edukasyong Pangmusika',
+  pitch_desc: 'Mula sa pagkilala ng isang nota hanggang sa paghatol ng interval at pag-alala ng melody, Pitch Quest ay gagabay sa iyo sa tatlong training path — Absolute Pitch, Relative Pitch, at Melody Memory — bawat isa ay may 10 progressive levels.',
+  pitch_f1: '3 training paths × 10 levels',
+  pitch_f2: '128 totoong instrument sounds',
+  pitch_f3: 'Built-in lessons & mga pahiwatig',
+  pitch_f4: 'Mga bituin, puntos & combos',
+  pitch_f5: 'Achievement wall & streaks',
+  pitch_f6: 'Gumagana offline',
+  pitch_cat: 'Edukasyon',
+  pitch_mock_q: 'Anong nota ito?',
+  pitch_mock_level: 'Level <span>3</span>',
   meta_free: 'Libre', meta_paid: 'HK$8',
   btn_download: 'I-download',
   privacy: 'Walang Data na Kinokolekta — Buong paggalang sa iyong privacy',
@@ -1098,6 +1366,18 @@ const i18n = {
   shade_f5: 'Hệ thống gợi ý xu',
   shade_f6: '6 ngôn ngữ',
   shade_cat: 'Trò chơi giải đố',
+  pitch_subtitle: 'Luyện tai của bạn, từng nốt một',
+  pitch_tag: 'Giáo dục âm nhạc',
+  pitch_desc: 'Từ nhận diện nốt đơn đến phán đoán quãng và ghi nhớ giai điệu, Pitch Quest hướng dẫn bạn từng bước qua ba lộ trình — Âm Tuyệt Đối, Âm Tương Đối, và Trí Nhớ Giai Điệu — mỗi lộ trình 10 cấp độ.',
+  pitch_f1: '3 lộ trình × 10 cấp độ',
+  pitch_f2: '128 âm thanh nhạc cụ thực',
+  pitch_f3: 'Bài học & gợi ý tích hợp',
+  pitch_f4: 'Sao, điểm & combo',
+  pitch_f5: 'Bảng thành tựu & chuỗi ngày',
+  pitch_f6: 'Hoạt động ngoại tuyến',
+  pitch_cat: 'Giáo dục',
+  pitch_mock_q: 'Đây là nốt gì?',
+  pitch_mock_level: 'Cấp <span>3</span>',
   meta_free: 'Miễn phí', meta_paid: 'HK$8',
   btn_download: 'Tải xuống',
   privacy: 'Không thu thập dữ liệu — Tôn trọng hoàn toàn quyền riêng tư của bạn',
@@ -1128,6 +1408,18 @@ const i18n = {
   shade_f5: 'सिक्का संकेत प्रणाली',
   shade_f6: '6 भाषाएँ',
   shade_cat: 'पज़ल गेम',
+  pitch_subtitle: 'एक सुर पर अपने कानों को प्रशिक्षित करें',
+  pitch_tag: 'संगीत शिक्षा',
+  pitch_desc: 'एकल सुर पहचान से लेकर अंतराल निर्णय और राग स्मरण तक, Pitch Quest तीन प्रशिक्षण पथों के माध्यम से आपका मार्गदर्शन करता है — एब्सोल्यूट पिच, रिलेटिव पिच और मेलोडी मेमोरी — प्रत्येक 10 प्रगतिशील स्तर।',
+  pitch_f1: '3 प्रशिक्षण पथ × 10 स्तर',
+  pitch_f2: '128 वास्तविक वाद्य ध्वनियाँ',
+  pitch_f3: 'अंतर्निहित पाठ और सुझाव',
+  pitch_f4: 'सितारे, अंक और कॉम्बो',
+  pitch_f5: 'उपलब्धि दीवार और स्ट्रीक',
+  pitch_f6: 'ऑफलाइन काम करता है',
+  pitch_cat: 'शिक्षा',
+  pitch_mock_q: 'यह कौन सा सुर है?',
+  pitch_mock_level: 'स्तर <span>3</span>',
   meta_free: 'मुफ़्त', meta_paid: 'HK$8',
   btn_download: 'डाउनलोड',
   privacy: 'कोई डेटा संग्रह नहीं — आपकी गोपनीयता का पूर्ण सम्मान',
@@ -1158,6 +1450,18 @@ const i18n = {
   shade_f5: 'Sistem petunjuk koin',
   shade_f6: '6 bahasa',
   shade_cat: 'Game Teka-teki',
+  pitch_subtitle: 'Latih pendengaranmu, satu nada pada satu waktu',
+  pitch_tag: 'Pendidikan Musik',
+  pitch_desc: 'Dari pengenalan nada tunggal hingga penilaian interval dan ingatan melodi, Pitch Quest memandu Anda langkah demi langkah melalui tiga jalur latihan — Pitch Absolut, Pitch Relatif, dan Memori Melodi — masing-masing 10 level progresif.',
+  pitch_f1: '3 jalur latihan × 10 level',
+  pitch_f2: '128 suara instrumen asli',
+  pitch_f3: 'Pelajaran & petunjuk bawaan',
+  pitch_f4: 'Bintang, skor & combo',
+  pitch_f5: 'Dinding prestasi & streak',
+  pitch_f6: 'Berfungsi offline',
+  pitch_cat: 'Pendidikan',
+  pitch_mock_q: 'Nada apa ini?',
+  pitch_mock_level: 'Level <span>3</span>',
   meta_free: 'Gratis', meta_paid: 'HK$8',
   btn_download: 'Unduh',
   privacy: 'Tidak Mengumpulkan Data — Privasi Anda sepenuhnya dihormati',
