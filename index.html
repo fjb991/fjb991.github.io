@@ -24,6 +24,9 @@
       --accent-pitch: #F59E0B;
       --accent-pitch-glow: rgba(245, 158, 11, 0.3);
       --gradient-pitch: linear-gradient(135deg, #F59E0B 0%, #D97706 100%);
+      --accent-eng: #339AF0;
+      --accent-eng-glow: rgba(51, 154, 240, 0.3);
+      --gradient-eng: linear-gradient(135deg, #339AF0 0%, #1971C2 100%);
     }
 
     * { margin: 0; padding: 0; box-sizing: border-box; }
@@ -398,7 +401,153 @@
       box-shadow: 0 8px 32px var(--accent-pitch-glow);
       transform: translateY(-2px);
     }
+    /* HK English theme (eng) */
+    .app-card.eng:hover { border-color: rgba(51, 154, 240, 0.3); }
+    .app-icon.eng-icon { box-shadow: 0 8px 32px var(--accent-eng-glow); }
+    .app-tag.eng-tag {
+      background: rgba(51, 154, 240, 0.15);
+      color: var(--accent-eng);
+    }
+    .eng .dot { background: var(--accent-eng); }
+    .btn-primary-eng {
+      background: var(--gradient-eng);
+      color: white;
+      box-shadow: 0 4px 20px var(--accent-eng-glow);
+    }
+    .btn-primary-eng:hover {
+      box-shadow: 0 8px 32px var(--accent-eng-glow);
+      transform: translateY(-2px);
+    }
     .btn svg { width: 18px; height: 18px; }
+
+    /* Browser mockup (HK English web app) */
+    .browser-mockup {
+      width: 340px;
+      max-width: 100%;
+      border-radius: 14px;
+      border: 3px solid rgba(255,255,255,0.1);
+      background: #1c1c28;
+      overflow: hidden;
+      box-shadow: 0 20px 60px rgba(0,0,0,0.5);
+    }
+    .browser-bar {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      padding: 10px 14px;
+      background: #16161f;
+      border-bottom: 1px solid rgba(255,255,255,0.06);
+    }
+    .browser-dots { display: flex; gap: 6px; }
+    .browser-dots span {
+      width: 11px; height: 11px;
+      border-radius: 50%;
+      display: block;
+    }
+    .browser-dots span:nth-child(1) { background: #ff5f57; }
+    .browser-dots span:nth-child(2) { background: #febc2e; }
+    .browser-dots span:nth-child(3) { background: #28c840; }
+    .browser-url {
+      flex: 1;
+      margin-left: 8px;
+      background: rgba(255,255,255,0.06);
+      border-radius: 8px;
+      padding: 5px 12px;
+      font-size: 0.72rem;
+      color: var(--text-muted);
+      font-family: ui-monospace, 'SF Mono', Menlo, monospace;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+    .browser-content {
+      padding: 22px 20px;
+      display: flex;
+      flex-direction: column;
+      gap: 14px;
+      min-height: 340px;
+    }
+    .eng-screen .eng-hero { text-align: center; padding: 2px 0; }
+    .eng-screen .eng-hero h3 {
+      font-size: 1.05rem;
+      font-weight: 800;
+      letter-spacing: 0.5px;
+      background: linear-gradient(135deg, var(--accent-eng), #91d8ff);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+    .eng-screen .eng-hero .kicker {
+      font-size: 0.66rem;
+      color: var(--text-muted);
+      margin-top: 4px;
+    }
+    .eng-screen .eng-modules {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 8px;
+    }
+    .eng-screen .eng-mod {
+      aspect-ratio: 1;
+      border-radius: 10px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.15rem;
+      background: linear-gradient(135deg, rgba(51,154,240,0.22), rgba(51,154,240,0.06));
+      border: 1px solid rgba(51,154,240,0.18);
+    }
+    .eng-screen .eng-progress {
+      background: rgba(255,255,255,0.04);
+      border-radius: 12px;
+      padding: 12px 14px;
+    }
+    .eng-screen .eng-progress .row {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      font-size: 0.7rem;
+      color: var(--text-secondary);
+      margin-bottom: 8px;
+    }
+    .eng-screen .eng-progress .stars { color: #facc15; letter-spacing: 1px; }
+    .eng-screen .eng-bar {
+      height: 7px;
+      border-radius: 99px;
+      background: rgba(255,255,255,0.08);
+      overflow: hidden;
+    }
+    .eng-screen .eng-bar i {
+      display: block;
+      height: 100%;
+      width: 68%;
+      border-radius: 99px;
+      background: var(--gradient-eng);
+    }
+    .eng-screen .eng-word {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      background: linear-gradient(135deg, rgba(51,154,240,0.16), rgba(255,255,255,0.03));
+      border: 1px solid rgba(51,154,240,0.2);
+      border-radius: 14px;
+      padding: 14px;
+    }
+    .eng-screen .eng-word .emoji { font-size: 1.9rem; }
+    .eng-screen .eng-word .word-text { flex: 1; }
+    .eng-screen .eng-word .word-text .w {
+      font-size: 1.05rem; font-weight: 700; color: var(--text-primary);
+    }
+    .eng-screen .eng-word .word-text .ipa {
+      font-size: 0.72rem; color: var(--text-muted); margin-top: 2px;
+    }
+    .eng-screen .eng-word .speak {
+      width: 34px; height: 34px;
+      border-radius: 50%;
+      background: var(--gradient-eng);
+      display: flex; align-items: center; justify-content: center;
+      color: white; font-size: 0.95rem;
+      flex-shrink: 0;
+    }
 
     /* Phone mockup */
     .app-visual {
@@ -712,7 +861,7 @@
     <p class="reveal d2" data-i18n="hero_desc">Small apps that do one thing well. Designed for real people, built with attention to every pixel.</p>
     <div class="hero-stats reveal d3">
       <div class="hero-stat">
-        <div class="num purple">3</div>
+        <div class="num purple">4</div>
         <div class="label" data-i18n="stat_apps">Apps</div>
       </div>
       <div class="hero-stat">
@@ -903,6 +1052,75 @@
         </div>
       </div>
     </div>
+
+    <!-- HK Primary English Adventure -->
+    <div class="app-card eng reveal">
+      <div class="app-card-inner">
+        <div class="app-info">
+          <div class="app-icon-row">
+            <div class="app-icon eng-icon" style="background: var(--gradient-eng); display: flex; align-items: center; justify-content: center; font-size: 2.2rem;">📚</div>
+            <div class="app-name-group">
+              <h2>HK Primary English Adventure</h2>
+              <div class="app-subtitle" data-i18n="eng_subtitle">Bilingual English learning for Hong Kong primary kids</div>
+            </div>
+          </div>
+          <span class="app-tag eng-tag" data-i18n="eng_tag">Web · Education</span>
+          <p class="app-desc" data-i18n="eng_desc">Aligned to the Hong Kong EDB 2025 curriculum and in sync with textbooks like Longman English Leap, this bilingual platform turns P2–P3 English into a game — eight skills, phonics &amp; grammar drills, TTS read-aloud, stars and badges, daily challenges and a mistake journal. No sign-up: progress is saved right in the browser.</p>
+          <ul class="app-features eng">
+            <li><span class="dot"></span><span data-i18n="eng_f1">Aligned to HK EDB 2025 curriculum</span></li>
+            <li><span class="dot"></span><span data-i18n="eng_f2">8 skills + Phonics &amp; Grammar</span></li>
+            <li><span class="dot"></span><span data-i18n="eng_f3">Bilingual EN·中 with TTS read-aloud</span></li>
+            <li><span class="dot"></span><span data-i18n="eng_f4">Stars, badges &amp; daily streaks</span></li>
+            <li><span class="dot"></span><span data-i18n="eng_f5">Daily challenge &amp; mistake journal</span></li>
+            <li><span class="dot"></span><span data-i18n="eng_f6">No sign-up — saves in browser</span></li>
+          </ul>
+          <div class="app-meta">
+            <div class="meta-item"><strong data-i18n="eng_cat">Education</strong></div>
+            <div class="meta-item"><strong data-i18n="eng_meta">Web · Browser</strong></div>
+            <div class="meta-item"><strong>P2–P6</strong></div>
+            <div class="meta-item"><strong data-i18n="meta_free">Free</strong></div>
+          </div>
+          <div class="app-actions">
+            <a href="https://hk-p2-english.vercel.app/" target="_blank" rel="noopener" class="btn btn-primary-eng">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
+              <span data-i18n="btn_visit">Visit Website</span>
+            </a>
+          </div>
+        </div>
+        <div class="app-visual">
+          <div class="browser-mockup">
+            <div class="browser-bar">
+              <div class="browser-dots"><span></span><span></span><span></span></div>
+              <div class="browser-url">🔒 hk-p2-english.vercel.app</div>
+            </div>
+            <div class="browser-content eng-screen">
+              <div class="eng-hero">
+                <h3>📚 English Adventure</h3>
+                <div class="kicker">P2 · P3 · Hong Kong</div>
+              </div>
+              <div class="eng-modules">
+                <div class="eng-mod">🔤</div>
+                <div class="eng-mod">📖</div>
+                <div class="eng-mod">✏️</div>
+                <div class="eng-mod">👂</div>
+              </div>
+              <div class="eng-progress">
+                <div class="row"><span>P2 · 96 words</span><span class="stars">★ ★ ★ ☆ ☆</span></div>
+                <div class="eng-bar"><i></i></div>
+              </div>
+              <div class="eng-word">
+                <span class="emoji">🍎</span>
+                <div class="word-text">
+                  <div class="w">apple</div>
+                  <div class="ipa">/ˈæp.əl/ · 苹果</div>
+                </div>
+                <div class="speak">🔊</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
   </section>
 
   <div class="privacy-section reveal">
@@ -1084,6 +1302,18 @@ const i18n = {
   pitch_cat: 'Education',
   pitch_mock_q: 'Which note is this?',
   pitch_mock_level: 'Level <span>3</span>',
+  eng_subtitle: 'Bilingual English learning for Hong Kong primary kids',
+  eng_tag: 'Web · Education',
+  eng_desc: 'Aligned to the Hong Kong EDB 2025 curriculum and in sync with textbooks like Longman English Leap, this bilingual platform turns P2–P3 English into a game — eight skills, phonics & grammar drills, TTS read-aloud, stars and badges, daily challenges and a mistake journal. No sign-up: progress is saved right in the browser.',
+  eng_f1: 'Aligned to HK EDB 2025 curriculum',
+  eng_f2: '8 skills + Phonics & Grammar',
+  eng_f3: 'Bilingual EN·中 with TTS read-aloud',
+  eng_f4: 'Stars, badges & daily streaks',
+  eng_f5: 'Daily challenge & mistake journal',
+  eng_f6: 'No sign-up — saves in browser',
+  eng_cat: 'Education',
+  eng_meta: 'Web · Browser',
+  btn_visit: 'Visit Website',
   meta_free: 'Free', meta_paid: 'HK$8',
   btn_download: 'Download',
   privacy: 'Zero Data Collected — Your privacy is fully respected',
@@ -1126,6 +1356,18 @@ const i18n = {
   pitch_cat: '教育',
   pitch_mock_q: '這是什麼音？',
   pitch_mock_level: '等級 <span>3</span>',
+  eng_subtitle: '為香港小學生打造的中英雙語英語學習平台',
+  eng_tag: '網頁 · 教育',
+  eng_desc: '緊扣香港教育局 2025 課程指引，並與 Longman English Leap 等教材同步，把 P2–P3 英語變成遊戲 — 八大技能練習、拼音與語法專項、TTS 朗讀、星星徽章、每日任務與錯題本。無需註冊，學習進度直接儲存在瀏覽器。',
+  eng_f1: '緊扣教育局 2025 課程',
+  eng_f2: '八大技能 + 拼音/語法',
+  eng_f3: '中英雙語 + TTS 朗讀',
+  eng_f4: '星星、徽章、每日連續',
+  eng_f5: '每日任務 + 錯題本',
+  eng_f6: '無需註冊，本地存進度',
+  eng_cat: '教育',
+  eng_meta: '網頁 · 瀏覽器',
+  btn_visit: '訪問網站',
   meta_free: '免費', meta_paid: 'HK$8',
   btn_download: '下載',
   privacy: '不收集任何數據 — 完全尊重您的隱私',
@@ -1168,6 +1410,18 @@ const i18n = {
   pitch_cat: '教育',
   pitch_mock_q: '这是什么音？',
   pitch_mock_level: '等级 <span>3</span>',
+  eng_subtitle: '为香港小学生打造的中英双语英语学习平台',
+  eng_tag: '网页 · 教育',
+  eng_desc: '紧扣香港教育局 2025 课程指引，并与 Longman English Leap 等教材同步，把 P2–P3 英语变成游戏 — 八大技能练习、拼音与语法专项、TTS 朗读、星星徽章、每日任务与错题本。无需注册，学习进度直接保存在浏览器。',
+  eng_f1: '紧扣教育局 2025 课程',
+  eng_f2: '八大技能 + 拼音/语法',
+  eng_f3: '中英双语 + TTS 朗读',
+  eng_f4: '星星、徽章、每日连续',
+  eng_f5: '每日任务 + 错题本',
+  eng_f6: '无需注册，本地存进度',
+  eng_cat: '教育',
+  eng_meta: '网页 · 浏览器',
+  btn_visit: '访问网站',
   meta_free: '免费', meta_paid: 'HK$8',
   btn_download: '下载',
   privacy: '不收集任何数据 — 完全尊重您的隐私',
@@ -1210,6 +1464,18 @@ const i18n = {
   pitch_cat: '教育',
   pitch_mock_q: 'これは何の音？',
   pitch_mock_level: 'レベル <span>3</span>',
+  eng_subtitle: '香港の小学生のためのバイリンガル英語学習',
+  eng_tag: 'ウェブ · 教育',
+  eng_desc: '香港教育局の2025年度カリキュラムに準拠し、Longman English Leap などの教科書と同期。このバイリンガルプラットフォームは P2–P3 の英語をゲームに変えます — 8つのスキル、フォニックスと文法ドリル、TTS読み上げ、スターとバッジ、デイリーチャレンジ、間違いノート。登録不要：進捗はブラウザに保存されます。',
+  eng_f1: '香港教育局2025カリキュラム準拠',
+  eng_f2: '8スキル + フォニックス/文法',
+  eng_f3: 'バイリンガル EN·中 + TTS読み上げ',
+  eng_f4: 'スター、バッジ、デイリーストリーク',
+  eng_f5: 'デイリーチャレンジ + 間違いノート',
+  eng_f6: '登録不要 — ブラウザに保存',
+  eng_cat: '教育',
+  eng_meta: 'ウェブ · ブラウザ',
+  btn_visit: 'ウェブサイトを見る',
   meta_free: '無料', meta_paid: 'HK$8',
   btn_download: 'ダウンロード',
   privacy: 'データ収集なし — お客様のプライバシーを完全に尊重します',
@@ -1252,6 +1518,18 @@ const i18n = {
   pitch_cat: '교육',
   pitch_mock_q: '이 음은 무엇인가요?',
   pitch_mock_level: '레벨 <span>3</span>',
+  eng_subtitle: '홍콩 초등학생을 위한 이중언어 영어 학습',
+  eng_tag: '웹 · 교육',
+  eng_desc: '홍콩 교육청 2025 커리큘럼에 부합하고 Longman English Leap 등 교과서와 동기화됩니다. 이 이중언어 플랫폼은 P2–P3 영어를 게임으로 바꿉니다 — 8가지 기술, 파닉스와 문법 연습, TTS 읽기, 별과 뱃지, 데일리 챌린지, 오답 노트. 가입 불필요: 진행 상황은 브라우저에 저장됩니다.',
+  eng_f1: '홍콩 교육청 2025 커리큘럼 연계',
+  eng_f2: '8가지 기술 + 파닉스/문법',
+  eng_f3: '이중언어 EN·中 + TTS 읽기',
+  eng_f4: '별, 뱃지, 데일리 스트릭',
+  eng_f5: '데일리 챌린지 + 오답 노트',
+  eng_f6: '가입 불필요 — 브라우저에 저장',
+  eng_cat: '교육',
+  eng_meta: '웹 · 브라우저',
+  btn_visit: '웹사이트 방문',
   meta_free: '무료', meta_paid: 'HK$8',
   btn_download: '다운로드',
   privacy: '데이터 수집 없음 — 고객님의 개인정보를 완전히 존중합니다',
@@ -1294,6 +1572,18 @@ const i18n = {
   pitch_cat: 'การศึกษา',
   pitch_mock_q: 'นี่คือโน้ตอะไร?',
   pitch_mock_level: 'ระดับ <span>3</span>',
+  eng_subtitle: 'การเรียนภาษาอังกฤษสองภาษาสำหรับเด็กประถมฮ่องกง',
+  eng_tag: 'เว็บ · การศึกษา',
+  eng_desc: 'สอดคล้องกับหลักสูตร 2025 ของกรมการศึกษาฮ่องกง และเชื่อมโยงกับหนังสือเรียนอย่าง Longman English Leap แพลตฟอร์มสองภาษานี้เปลี่ยนภาษาอังกฤษ P2–P3 ให้เป็นเกม — แปดทักษะ แบบฝึกฟอนิกส์และไวยากรณ์ TTS อ่านให้ฟัง ดาวและเข็ม ความท้าทายประจำวัน และสมุดโจทย์ผิด ไม่ต้องสมัคร: ความคืบหน้าบันทึกในเบราว์เซอร์',
+  eng_f1: 'สอดคล้องหลักสูตรฮ่องกง 2025',
+  eng_f2: '8 ทักษะ + ฟอนิกส์/ไวยากรณ์',
+  eng_f3: 'สองภาษา EN·中 + TTS อ่านให้ฟัง',
+  eng_f4: 'ดาว เข็ม สตรีคประจำวัน',
+  eng_f5: 'ความท้าทายประจำวัน + สมุดโจทย์ผิด',
+  eng_f6: 'ไม่ต้องสมัคร — บันทึกในเบราว์เซอร์',
+  eng_cat: 'การศึกษา',
+  eng_meta: 'เว็บ · เบราว์เซอร์',
+  btn_visit: 'เยี่ยมชมเว็บไซต์',
   meta_free: 'ฟรี', meta_paid: 'HK$8',
   btn_download: 'ดาวน์โหลด',
   privacy: 'ไม่เก็บรวบรวมข้อมูล — เคารพความเป็นส่วนตัวของคุณอย่างเต็มที่',
@@ -1336,6 +1626,18 @@ const i18n = {
   pitch_cat: 'Edukasyon',
   pitch_mock_q: 'Anong nota ito?',
   pitch_mock_level: 'Level <span>3</span>',
+  eng_subtitle: 'Bilingual na English learning para sa HK primary kids',
+  eng_tag: 'Web · Edukasyon',
+  eng_desc: 'Naka-align sa HK EDB 2025 curriculum at kasabay ng mga textbook tulad ng Longman English Leap, ginagawang laro ng bilingual platform na ito ang P2–P3 English — walong skills, phonics & grammar drills, TTS read-aloud, stars at badges, daily challenges, at mistake journal. Walang sign-up: nasa browser agad ang progress.',
+  eng_f1: 'Aligned sa HK EDB 2025 curriculum',
+  eng_f2: '8 skills + Phonics/Grammar',
+  eng_f3: 'Bilingual EN·中 + TTS read-aloud',
+  eng_f4: 'Stars, badges & daily streaks',
+  eng_f5: 'Daily challenge & mistake journal',
+  eng_f6: 'Walang sign-up — nasa browser',
+  eng_cat: 'Edukasyon',
+  eng_meta: 'Web · Browser',
+  btn_visit: 'Bisitahin ang Website',
   meta_free: 'Libre', meta_paid: 'HK$8',
   btn_download: 'I-download',
   privacy: 'Walang Data na Kinokolekta — Buong paggalang sa iyong privacy',
@@ -1378,6 +1680,18 @@ const i18n = {
   pitch_cat: 'Giáo dục',
   pitch_mock_q: 'Đây là nốt gì?',
   pitch_mock_level: 'Cấp <span>3</span>',
+  eng_subtitle: 'Học tiếng Anh song ngữ cho học sinh tiểu học Hong Kong',
+  eng_tag: 'Web · Giáo dục',
+  eng_desc: 'Bám sát chương trình EDB 2025 của Hong Kong và đồng bộ với giáo trình như Longman English Leap, nền tảng song ngữ này biến tiếng Anh P2–P3 thành trò chơi — tám kỹ năng, luyện phát âm và ngữ pháp, TTS đọc thành tiếng, sao và huy hiệu, thử thách hàng ngày và sổ nhầm lẫn. Không cần đăng ký: tiến trình được lưu ngay trong trình duyệt.',
+  eng_f1: 'Bám sát chương trình HK EDB 2025',
+  eng_f2: '8 kỹ năng + Phonics/Grammar',
+  eng_f3: 'Song ngữ EN·中 + TTS đọc',
+  eng_f4: 'Sao, huy hiệu & chuỗi ngày',
+  eng_f5: 'Thử thách hàng ngày & sổ nhầm lẫn',
+  eng_f6: 'Không đăng ký — lưu trong trình duyệt',
+  eng_cat: 'Giáo dục',
+  eng_meta: 'Web · Trình duyệt',
+  btn_visit: 'Truy cập Website',
   meta_free: 'Miễn phí', meta_paid: 'HK$8',
   btn_download: 'Tải xuống',
   privacy: 'Không thu thập dữ liệu — Tôn trọng hoàn toàn quyền riêng tư của bạn',
@@ -1420,6 +1734,18 @@ const i18n = {
   pitch_cat: 'शिक्षा',
   pitch_mock_q: 'यह कौन सा सुर है?',
   pitch_mock_level: 'स्तर <span>3</span>',
+  eng_subtitle: 'हांगकांग प्राथमिक बच्चों के लिए द्विभाषी अंग्रेज़ी सीखना',
+  eng_tag: 'वेब · शिक्षा',
+  eng_desc: 'हांगकांग EDB 2025 पाठ्यक्रम के अनुरूप और Longman English Leap जैसी पाठ्यपुस्तकों के साथ सिंक, यह द्विभाषी प्लेटफ़ॉर्म P2–P3 अंग्रेज़ी को खेल में बदल देता है — आठ कौशल, फोनिक्स और व्याकरण अभ्यास, TTS पढ़ना, सितारे और बैज, दैनिक चुनौतियाँ और गलतियों की डायरी। साइन-अप नहीं: प्रगति सीधे ब्राउज़र में सहेजी जाती है।',
+  eng_f1: 'HK EDB 2025 पाठ्यक्रम के अनुरूप',
+  eng_f2: '8 कौशल + फोनिक्स/व्याकरण',
+  eng_f3: 'द्विभाषी EN·中 + TTS पढ़ना',
+  eng_f4: 'सितारे, बैज और दैनिक स्ट्रीक',
+  eng_f5: 'दैनिक चुनौती और गलती डायरी',
+  eng_f6: 'साइन-अप नहीं — ब्राउज़र में सहेजें',
+  eng_cat: 'शिक्षा',
+  eng_meta: 'वेब · ब्राउज़र',
+  btn_visit: 'वेबसाइट पर जाएँ',
   meta_free: 'मुफ़्त', meta_paid: 'HK$8',
   btn_download: 'डाउनलोड',
   privacy: 'कोई डेटा संग्रह नहीं — आपकी गोपनीयता का पूर्ण सम्मान',
@@ -1462,6 +1788,18 @@ const i18n = {
   pitch_cat: 'Pendidikan',
   pitch_mock_q: 'Nada apa ini?',
   pitch_mock_level: 'Level <span>3</span>',
+  eng_subtitle: 'Belajar bahasa Inggris dwibahasa untuk anak SD Hong Kong',
+  eng_tag: 'Web · Pendidikan',
+  eng_desc: 'Selaras dengan kurikulum HK EDB 2025 dan sinkron dengan buku teks seperti Longman English Leap, platform dwibahasa ini mengubah English P2–P3 jadi permainan — delapan keterampilan, latihan fonik & tata bahasa, TTS read-aloud, bintang dan lencana, tantangan harian, dan jurnal kesalahan. Tanpa daftar: progres tersimpan langsung di browser.',
+  eng_f1: 'Selaras kurikulum HK EDB 2025',
+  eng_f2: '8 keterampilan + Fonik/Tata bahasa',
+  eng_f3: 'Dwibahasa EN·中 + TTS read-aloud',
+  eng_f4: 'Bintang, lencana & streak harian',
+  eng_f5: 'Tantangan harian & jurnal kesalahan',
+  eng_f6: 'Tanpa daftar — tersimpan di browser',
+  eng_cat: 'Pendidikan',
+  eng_meta: 'Web · Browser',
+  btn_visit: 'Kunjungi Website',
   meta_free: 'Gratis', meta_paid: 'HK$8',
   btn_download: 'Unduh',
   privacy: 'Tidak Mengumpulkan Data — Privasi Anda sepenuhnya dihormati',
